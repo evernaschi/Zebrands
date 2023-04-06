@@ -51,6 +51,21 @@ Use the following example credentials to log in as an administrator:
 - Username: admin@example.com
 - Password: admin123
 
+## Structure
+
+The Zebrands directory contains the main application code:
+
+- api: Contains the API endpoints.
+- core: Contains security and basic configurations.
+- crud: Contains CRUD methods.
+- db: Creates the database engine and initializes the SQLAlchemy's declarative base.
+- models: Contains Database models.
+- schemas: Contains Pydantic schemas for the database models.
+- tests: Contains the test files.
+- main.py: The entry point of the application.
+- prestart.sh: Script that runs before starting the app.
+
+
 ## Authors
 
 - **Eric Vernaschi** - [evernaschi](https://github.com/evernaschi)
