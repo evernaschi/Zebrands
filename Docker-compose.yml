@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:12
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    restart: always
+    env_file:
+      - .env
+    environment:
+      PGDATA: /var/lib/postgresql/data/pgdata
+      PGUSER: "postgres"
+    healthcheck:
+      #CHANGE 1: this command checks if the database is ready, right on the source db server
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: .
+    restart: always
+    expose:
+      - "8000"
+    ports:
+      - "8080:8000"
+    command: bash -c "/code/app/prestart.sh && uvicorn app.main:app --host 0.0.0.0 --port 8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
