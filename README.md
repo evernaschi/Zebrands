@@ -1,6 +1,6 @@
 # Zebrands
 
-Zebrands is a project that provides an API to manage a catalog of products and brands. It is built using Python and FastAPI.
+Zebrands is a project that provides an API to manage a catalog of products. It is built using Python and FastAPI.
 
 ## Getting Started
 
