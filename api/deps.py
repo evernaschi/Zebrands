@@ -2,7 +2,6 @@ from typing import Generator, Union, Optional
 
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from starlette.requests import Request
 from jose import jwt
 from pydantic import ValidationError
 from sqlalchemy.orm import Session
@@ -15,20 +14,6 @@ from app.db.session import SessionLocal
 # pylint:disable=invalid-name
 
 
-# class OptionalOAuth2PasswordBearer(OAuth2PasswordBearer):
-#     # allows anonymous users
-#     async def __call__(self, request: Request) -> Optional[str]:
-#         authorization = request.headers.get("Authorization")
-#         if not authorization:
-#             return None
-#         return await super().__call__(authorization)
-
-
-# oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-# oauth2_scheme = OptionalOAuth2PasswordBearer(
-#     tokenUrl=f"{settings.API_V1_STR}/login/access-token"
-# )
-# oauth2_scheme_optional = OptionalOAuth2PasswordBearer(tokenUrl="token")
 oauth2_scheme = OAuth2PasswordBearer(
     tokenUrl=f"{settings.API_V1_STR}/login/access-token",
     auto_error=False,  # for anonymous users
